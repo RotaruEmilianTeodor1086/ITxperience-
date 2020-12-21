@@ -1,8 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const Sequelize  = require('sequelize')
-const { format } = require('sequelize/types/lib/utils')
-const sequelize = new Sequelize('my_database','app','clau_the_best',{
+const sequelize = new Sequelize('notes_app','root','',{
 
     dialect:'mysql'
 
@@ -36,7 +35,7 @@ const Note= sequelize.define('note',{
         validate:{
             len: [2,40],
             isEmail: true,
-            isUnique: sequelize.validateIsUnique('email', 'That email is being used. Please choose a different email address'),
+         //   isUnique: sequelize.validateIsUnique('email', 'That email is being used. Please choose a different email address'),
         }  
 
     }
@@ -62,12 +61,12 @@ const Subject = sequelize.define('subject',{
 })
 const User = sequelize.define("user", {
     username: {
-      type: DataTypes.TEXT,
+      type: Sequelize.DataTypes.TEXT ,   
       allowNull: false,
       unique: true
     },
     hashedPassword: {
-      type: DataTypes.STRING(64),
+      type: Sequelize.DataTypes.STRING(64),
       is: /^[0-9a-f]{64}$/i
     }
   });
@@ -76,7 +75,17 @@ User.hasMany(Subject)
 const app = express() 
 app.use(bodyParser.json())
 
+app.get('/create', async (req,res,next)=>{
+    try{
+        await sequelize.sync({force: true})
 
+    }
+    catch(err){
+        next(err) ; 
+    }
+
+
+})
 app.get('/user', async(req,res,next)=>{
     try{
         const users = await User.findAll()
