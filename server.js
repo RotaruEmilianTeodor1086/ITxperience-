@@ -247,7 +247,6 @@ app.put('/users/:uid/subjects/:sid', async(req,res,next)=>{
         next(err)  
     }
 })
-
 app.delete('/users/:uid/subjects/:sid', async(req,res,next)=>{
     try{
         const user =  await User.findByPk(req.params.uid) 
@@ -275,8 +274,6 @@ app.delete('/users/:uid/subjects/:sid', async(req,res,next)=>{
     }
 
 })
-
-
 
 app.get('/users/:uid/subjects/:sid/notes', async(req,res,next)=>{
     try{
@@ -322,9 +319,6 @@ app.delete('/users/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{
         next(err)  
     }
 })
-
-
-
 
 
 app.listen(8080)
