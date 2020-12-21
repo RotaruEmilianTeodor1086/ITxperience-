@@ -6,7 +6,8 @@ const sequelize = new Sequelize('my_database','app','clau_the_best',{
 
     dialect:'mysql'
 
-} )
+})
+
 const Note= sequelize.define('note',{
 
     title:{
@@ -75,23 +76,146 @@ User.hasMany(Subject)
 const app = express() 
 app.use(bodyParser.json())
 
-app.get('/user', async(req,res,next)=>{})
-app.post('/user', async(req,res,next)=>{})
-app.get('/user/:uid', async(req,res,next)=>{})
-app.put('/user/:uid', async(req,res,next)=>{})
-app.delete('/user/:uid', async(req,res,next)=>{})
 
-app.get('/user/:uid/subjects', async(req,res,next)=>{})
-app.post('/user/:uid/subjects', async(req,res,next)=>{})
-app.get('/user/:uid/subjects/:sid', async(req,res,next)=>{})
-app.put('/user/:uid/subjects/:sid', async(req,res,next)=>{})
-app.delete('/user/:uid/subjects/:sid', async(req,res,next)=>{})
+app.get('/user', async(req,res,next)=>{
+    try{
+        const users = await User.findAll()
+        res.status(200).json(users) ; 
+    }
+    catch(err){
+        next(err) ; 
+    }
 
-app.get('/user/:uid/subjects/:sid/notes', async(req,res,next)=>{})
-app.post('/user/:uid/subjects/:sid/notes', async(req,res,next)=>{})
-app.get('/user/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{})
-app.put('/user/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{})
-app.delete('/user/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{})
+})
+
+app.post('/user', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
+
+app.get('/user/:uid', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
+
+app.put('/user/:uid', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
+
+app.delete('/user/:uid', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
+
+
+app.get('/user/:uid/subjects', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
+
+app.post('/user/:uid/subjects', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
+
+app.get('/user/:uid/subjects/:sid', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
+
+app.put('/user/:uid/subjects/:sid', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
+
+app.delete('/user/:uid/subjects/:sid', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
+
+
+
+app.get('/user/:uid/subjects/:sid/notes', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
+
+app.post('/user/:uid/subjects/:sid/notes', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
+
+app.get('/user/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
+
+app.put('/user/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
+
+app.delete('/user/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err) ; 
+    }
+})
 
 
 
