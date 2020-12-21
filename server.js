@@ -203,9 +203,33 @@ app.get('/users/:uid/subjects/:sid', async(req,res,next)=>{
     try{
         const user =  await User.findByPk(req.params.uid) 
         if(user){
-            const subjects = await user.getSubjects({ id: req.params.sid})
+            const subjects = await user.getSubjects({where:{ id: req.params.sid}} )
             const subject = subjects.shift()
             if(subject){
+                res.status(200).json(subject)
+
+            }else{
+                res.status(404).json({message: ' subject not found'})
+
+            }
+        }
+        else{
+            res.status(404).json({message: ' user not found'})
+        }
+    }
+    catch(err){
+        next(err)  
+    }
+})
+app.put('/users/:uid/subjects/:sid', async(req,res,next)=>{
+    try{
+        const user =  await User.findByPk(req.params.uid) 
+        if(user){
+            const subjects = await user.getSubjects({where:{ id: req.params.sid}} )
+
+            const subject = subjects.shift()
+            if(subject){
+                await subject.update(req.body)
                 res.status(200).json(subject)
 
             }else{
@@ -224,22 +248,32 @@ app.get('/users/:uid/subjects/:sid', async(req,res,next)=>{
     }
 })
 
-app.put('/users/:uid/subjects/:sid', async(req,res,next)=>{
-    try{
-
-    }
-    catch(err){
-        next(err)  
-    }
-})
-
 app.delete('/users/:uid/subjects/:sid', async(req,res,next)=>{
     try{
+        const user =  await User.findByPk(req.params.uid) 
+        if(user){
+            const subjects = await user.getSubjects({where:{ id: req.params.sid}} )
+
+            const subject = subjects.shift()
+            if(subject){              
+                await subject.destroy()
+                res.status(200).json(subject)
+
+            }else{
+                res.status(404).json({message: ' subject not found'})
+
+            }
+        }
+        else{
+            res.status(404).json({message: ' user not found'})
+        }
+
 
     }
     catch(err){
         next(err)  
     }
+
 })
 
 
