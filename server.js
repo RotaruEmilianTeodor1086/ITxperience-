@@ -70,9 +70,31 @@ const User = sequelize.define("user", {
       is: /^[0-9a-f]{64}$/i
     }
   });
-  
 Subject.hasMany(Note)
 User.hasMany(Subject)
 const app = express() 
 app.use(bodyParser.json())
+
+app.get('/user', async(req,res,next)=>{})
+app.post('/user', async(req,res,next)=>{})
+app.get('/user/:uid', async(req,res,next)=>{})
+app.put('/user/:uid', async(req,res,next)=>{})
+app.delete('/user/:uid', async(req,res,next)=>{})
+
+app.get('/user/:uid/subjects', async(req,res,next)=>{})
+app.post('/user/:uid/subjects', async(req,res,next)=>{})
+app.get('/user/:uid/subjects/:sid', async(req,res,next)=>{})
+app.put('/user/:uid/subjects/:sid', async(req,res,next)=>{})
+app.delete('/user/:uid/subjects/:sid', async(req,res,next)=>{})
+
+app.get('/user/:uid/subjects/:sid/notes', async(req,res,next)=>{})
+app.post('/user/:uid/subjects/:sid/notes', async(req,res,next)=>{})
+app.get('/user/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{})
+app.put('/user/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{})
+app.delete('/user/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{})
+
+
+
+
+
 app.listen(8080)
