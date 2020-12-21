@@ -168,7 +168,6 @@ app.get('/users/:uid/subjects', async(req,res,next)=>{
             include: [Subject]
         }) 
         if(user){
-            await user.update(req.body)
             res.status(200).json(user.subjects)
         }
         else{
@@ -186,7 +185,7 @@ app.post('/users/:uid/subjects', async(req,res,next)=>{
         const user =  await User.findByPk(req.params.uid) 
         if(user){
             const subject = new Subject(req.body)
-            subject.userID = user.id 
+            subject.userId = user.id 
             await subject.save()
             res.status(202).json({message: 'created'})
         }
