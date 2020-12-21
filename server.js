@@ -78,151 +78,199 @@ app.use(bodyParser.json())
 app.get('/create', async (req,res,next)=>{
     try{
         await sequelize.sync({force: true})
+        res.status(201).json({message: 'created'})
 
     }
     catch(err){
-        next(err) ; 
+        next(err)  
     }
 
 
 })
-app.get('/user', async(req,res,next)=>{
+app.get('/users', async(req,res,next)=>{
     try{
         const users = await User.findAll()
-        res.status(200).json(users) ; 
+        res.status(200).json(users)  
     }
     catch(err){
-        next(err) ; 
+        next(err)  
     }
 
 })
 
-app.post('/user', async(req,res,next)=>{
+app.post('/users', async(req,res,next)=>{
     try{
+        await User.create(req.body)
+        res.status(201).json({message: 'created'})
 
     }
     catch(err){
-        next(err) ; 
+        next(err)  
     }
 })
 
-app.get('/user/:uid', async(req,res,next)=>{
+app.get('/users/:uid', async(req,res,next)=>{
     try{
+        const user =  await User.findByPk(req.params.uid) 
+        if(user){
+            res.status(200).json(user)
+        }
+        else{
+            res.status(404).json({message: 'not found'})
+        }
+
 
     }
     catch(err){
-        next(err) ; 
+        next(err)  
     }
 })
 
-app.put('/user/:uid', async(req,res,next)=>{
+app.put('/users/:uid', async(req,res,next)=>{
     try{
+        const user =  await User.findByPk(req.params.uid) 
+        if(user){
+            await user.update(req.body)
+            res.status(202).json({message: 'accepted'})
+        }
+        else{
+            res.status(404).json({message: 'not found'})
+        }
 
     }
     catch(err){
-        next(err) ; 
+        next(err) 
     }
 })
 
-app.delete('/user/:uid', async(req,res,next)=>{
+app.delete('/users/:uid', async(req,res,next)=>{
     try{
+        const user =  await User.findByPk(req.params.uid) 
+        if(user){
+            await user.destroy()
+            res.status(202).json({message: 'accepted'})
+
+        }
+        else{
+            res.status(404).json({message: 'not found'})
+        }
 
     }
     catch(err){
-        next(err) ; 
-    }
-})
-
-
-app.get('/user/:uid/subjects', async(req,res,next)=>{
-    try{
-
-    }
-    catch(err){
-        next(err) ; 
-    }
-})
-
-app.post('/user/:uid/subjects', async(req,res,next)=>{
-    try{
-
-    }
-    catch(err){
-        next(err) ; 
-    }
-})
-
-app.get('/user/:uid/subjects/:sid', async(req,res,next)=>{
-    try{
-
-    }
-    catch(err){
-        next(err) ; 
-    }
-})
-
-app.put('/user/:uid/subjects/:sid', async(req,res,next)=>{
-    try{
-
-    }
-    catch(err){
-        next(err) ; 
-    }
-})
-
-app.delete('/user/:uid/subjects/:sid', async(req,res,next)=>{
-    try{
-
-    }
-    catch(err){
-        next(err) ; 
+        next(err)  
     }
 })
 
 
-
-app.get('/user/:uid/subjects/:sid/notes', async(req,res,next)=>{
+app.get('/users/:uid/subjects', async(req,res,next)=>{
     try{
+        const user =  await User.findByPk(req.params.uid,{
+            include: [Subject]
+        }) 
+        if(user){
+            await user.update(req.body)
+            res.status(200).json(user.subjects)
+        }
+        else{
+            res.status(404).json({message: 'not found'})
+        }
 
     }
     catch(err){
-        next(err) ; 
+        next(err) 
     }
 })
 
-app.post('/user/:uid/subjects/:sid/notes', async(req,res,next)=>{
+app.post('/users/:uid/subjects', async(req,res,next)=>{
     try{
+        const user =  await User.findByPk(req.params.uid) 
+        if(user){
+            const subject = new Subject(req.body)
+            subject.userID = user.id 
+            await subject.save()
+            res.status(202).json({message: 'created'})
+        }
+        else{
+            res.status(404).json({message: 'not found'})
+        }
 
     }
     catch(err){
-        next(err) ; 
+        next(err)  
     }
 })
 
-app.get('/user/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{
+app.get('/users/:uid/subjects/:sid', async(req,res,next)=>{
     try{
 
     }
     catch(err){
-        next(err) ; 
+        next(err) 
     }
 })
 
-app.put('/user/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{
+app.put('/users/:uid/subjects/:sid', async(req,res,next)=>{
     try{
 
     }
     catch(err){
-        next(err) ; 
+        next(err)  
     }
 })
 
-app.delete('/user/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{
+app.delete('/users/:uid/subjects/:sid', async(req,res,next)=>{
     try{
 
     }
     catch(err){
-        next(err) ; 
+        next(err)  
+    }
+})
+
+
+
+app.get('/users/:uid/subjects/:sid/notes', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err)  
+    }
+})
+
+app.post('/users/:uid/subjects/:sid/notes', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err)  
+    }
+})
+
+app.get('/users/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err)  
+    }
+})
+
+app.put('/users/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err)  
+    }
+})
+
+app.delete('/users/:uid/subjects/:sid/notes/:nid', async(req,res,next)=>{
+    try{
+
+    }
+    catch(err){
+        next(err)  
     }
 })
 
