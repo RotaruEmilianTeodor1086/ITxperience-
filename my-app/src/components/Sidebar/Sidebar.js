@@ -1,7 +1,7 @@
 import React from 'react'
 import './Sidebar.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faAngleDown,faSearch,faPlus} from '@fortawesome/free-solid-svg-icons'
+import {faAngleDown,faSearch,faPlus,faStar, faStickyNote,faTrash} from '@fortawesome/free-solid-svg-icons'
 
 function Sidebar() {
   return (
@@ -26,9 +26,29 @@ function Sidebar() {
                 <div className= "create_note_button">                
                 <FontAwesomeIcon id="iconAdd" icon={faPlus}/>
                 <div className="note_title">
-                    Adauga notita
+                    <strong>Adauga notita</strong>
                 </div>
                 </div>
+            </div>
+            <hr id="horizontalLine"></hr>
+            <div className="sidebar_menu">
+                 <ul>
+                     <li>
+                       <FontAwesomeIcon className="iconDummy" icon={faStar}>
+                       </FontAwesomeIcon>
+                       Exemplu
+                     </li>
+                     <li>
+                       <FontAwesomeIcon className="iconAllNotes" icon={faStickyNote}>
+                       </FontAwesomeIcon>
+                       Toate notitele
+                     </li>
+                     <li>
+                       <FontAwesomeIcon className="iconTrash" icon={faTrash}>
+                       </FontAwesomeIcon>
+                       Cos de gunoi
+                     </li>
+                 </ul>
             </div>
             <div className= "idk">
 
