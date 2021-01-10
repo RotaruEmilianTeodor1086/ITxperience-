@@ -1,7 +1,7 @@
 import React from 'react'
 import './Sidebar.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faAngleDown,faSearch} from '@fortawesome/free-solid-svg-icons'
+import {faAngleDown,faSearch,faPlus} from '@fortawesome/free-solid-svg-icons'
 
 function Sidebar() {
   return (
@@ -18,9 +18,20 @@ function Sidebar() {
             </div>
             <div className= "search">
                 <div className= "search_block">
-                    <FontAwesomeIcon icon = {faSearch}/>
-                    <input placeholder="Cauta"/>
+                    <FontAwesomeIcon id="iconSearch" icon = {faSearch}/>
+                    <input id= "input" placeholder="Cauta"/>
                 </div>
+            </div>
+            <div className= "sidebare_new_note">
+                <div className= "create_note_button">                
+                <FontAwesomeIcon id="iconAdd" icon={faPlus}/>
+                <div className="note_title">
+                    Adauga notita
+                </div>
+                </div>
+            </div>
+            <div className= "idk">
+
             </div>
         </div>
     </div>
