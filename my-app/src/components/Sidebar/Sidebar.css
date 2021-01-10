@@ -1,0 +1,50 @@
+.sidebar{
+    width: 20%;
+    background:#0f036b;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    height: 100vh;
+}
+.sidebar_top{
+    flex:1 ; 
+}
+.sidebar_profile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+.profile_icon{   
+    background: coral;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profile_title{
+    display: flex;
+    align-items: center;
+    font-size: small;
+    flex: 1;
+    margin-left: 15px;
+}
+.icon{
+    margin: 0 10px ; 
+    font-size: 10px;
+}
+.search{
+    padding: 15px;
+
+}
+.search_block{
+    align-items: center;
+    background: darkgreen;
+    padding: 8px 10px;
+    border-radius: 50px;
+
+}
+
