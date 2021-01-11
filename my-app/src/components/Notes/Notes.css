@@ -102,3 +102,11 @@
 {
     cursor:pointer;
 }
+.empty-state{
+    align-items: center;
+    height: 100%;
+    opacity: 0.7;
+    display: flex;
+    justify-content: center;
+    font-size:x-large;
+}

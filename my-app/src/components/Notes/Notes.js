@@ -1,6 +1,6 @@
 import React,{useContext, useEffect, useReducer, useState} from 'react'
 import './Notes.css';
-import{useRouteMatch, useHistory} from "react-router-dom"
+import{useRouteMatch, useHistory, NavLink} from "react-router-dom"
 import { GET_ALL_NOTES,BASE_URL,GET_TRASH_NOTES } from '../../util/apiEndpoints';
 import { getRequest } from '../../util/apiRequests';
 import { NotesContext } from '../../context/context';
@@ -11,34 +11,31 @@ const Notes = (props) =>{
      const {title} = props ; 
      const history = useHistory() ; 
      const match = useRouteMatch() ; 
+     console.log(match.url) ; 
      useEffect(()=>{
           getNotes() ; 
-
      },[match.url])
 
      const getNotes = async()=>{
           let endpoint = '' ; 
           if(match.url =='/all-notes'){
                endpoint = GET_ALL_NOTES
-          }else if(match.url =='./trash' ){
+          }else if(match.url =='/trash' ){
                endpoint= GET_TRASH_NOTES ; 
-
           }else{
                return; 
           }
-          const response = await getRequest(`${BASE_URL}${endpoint}`) ; 
-  
+          const response = await getRequest(`${BASE_URL}${endpoint}`) ;  
           if(response.error){
                setError(response.error) ; 
                return false ; 
-
           }
+          notesContext.notesDispatch({type:'getAllNotesSuccess',paylod: response}) ; 
 
           if(response.length >0){
 
-               notesContext.notesDispatch({type:'getAllNotesSuccess',paylod: response}) ; 
                history.push({
-                   pathname:`/all-notes/${response._id}`,
+                   pathname:`${match.url}/${response._id}`,
                    note:response
                })
           }
@@ -57,13 +54,26 @@ const Notes = (props) =>{
               </div>
          </div>
          <div class="MiddleNotesList">
-              <div class="MiddleNotesListPreview">
-                   <div class="MiddleNotesListPreviewHead">
-                        <div class="MiddleNotesListPreviewHead_NoteTitle">Test la Android</div>
-                        <div class="MiddleNotesListPreviewHead_NoteDescription">Descrierea testului</div>
-                   </div>
-                   <div class="MiddleNotesListPreviewBottom_Date">11.01.2020</div>
-              </div>
+              {
+              notesContext.notesState.length >0? notesContext.notesState.map((note)=>(
+               <NavLink key = {note._id} class="MiddleNotesListPreview"
+               to ={
+                     {
+                    pathname:`${match.url}/${note._id}`,
+                    note
+               }
+          }>
+               <div class="MiddleNotesListPreviewHead">
+                    <div class="MiddleNotesListPreviewHead_NoteTitle">{note.title}</div>
+                    <div class="MiddleNotesListPreviewHead_NoteDescription">{note.description}</div>
+               </div>
+               <div class="MiddleNotesListPreviewBottom_Date">{note.updatedDate}</div>
+               </NavLink>
+              )
+                    
+              ):<div className="empty-state">Nu avem date </div>
+               }
+
          </div>
 
     </div>
