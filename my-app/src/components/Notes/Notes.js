@@ -5,16 +5,20 @@ import { GET_ALL_NOTES,BASE_URL,GET_TRASH_NOTES } from '../../util/apiEndpoints'
 import { getRequest } from '../../util/apiRequests';
 import { NotesContext } from '../../context/context';
 const Notes = (props) =>{
+
      const[error,setError] = useState(null) ; 
      const notesContext = useContext(NotesContext) ; 
      const {title} = props ; 
      const history = useHistory() ; 
      const match = useRouteMatch() ; 
+     useEffect(()=>{
+          getNotes() ; 
+     },[match.url])
+
      const getNotes = async()=>{
           let endpoint = '' ; 
           if(match.url =='/all-notes'){
                endpoint = GET_ALL_NOTES
-
           }else if(match.url =='./trash' ){
                endpoint= GET_TRASH_NOTES ; 
 
@@ -22,6 +26,7 @@ const Notes = (props) =>{
                return; 
           }
           const response = await getRequest(`${BASE_URL}${endpoint}`) ; 
+  
           if(response.error){
                setError(response.error) ; 
                return false ; 
@@ -30,16 +35,13 @@ const Notes = (props) =>{
 
           if(response.length >0){
 
-               notesContext.notesDispatch({type:'getAllNotesSuccess', payload:response}) ; 
+               notesContext.notesDispatch({type:'getAllNotesSuccess',paylod: response}) ; 
                history.push({
-                    pathname:`${match.url}/${response[0]._id}`,
-                    note: response[0]
+                   pathname:`/all-notes/${response._id}`,
+                   note:response
                })
           }
      }
-     useEffect(()=>{
-          getNotes() ; 
-     },[match.url])
 
   return (
     <div className="AllTheNotes">
