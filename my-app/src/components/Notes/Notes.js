@@ -71,7 +71,7 @@ const Notes = (props) =>{
                </NavLink>
               )
                     
-              ):<div className="empty-state">Nu avem date </div>
+              ):<div className="emptyState">Nu avem date </div>
                }
 
          </div>

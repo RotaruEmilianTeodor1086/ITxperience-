@@ -1,4 +1,4 @@
-const{createNote,fetchAllNotes,updateNote,deleteNote}= require('./model') ; 
+const{createNote,fetchAllNotes,updateNote,deleteNote}= require('./model'); 
 const {getTime}= require('./helper') ;
 exports.createNewNote= async(req,res)=>{
 try{
@@ -9,7 +9,8 @@ try{
         description:'',
         creationDate: currentTime,
         updatedDate: currentTime,
-    }
+        archive:0
+    };
     let id = await createNote(newNote) ;
     newNote['_id'] = id ; 
     res.status(200).send(newNote) ; 
@@ -20,6 +21,7 @@ catch(err){
     res.status(400).send(err.message) ; 
 }
 }
+
 exports.getAllNotes = async(req,res) =>{
     try{
         let query = {
@@ -30,7 +32,6 @@ exports.getAllNotes = async(req,res) =>{
         }
         let data = await fetchAllNotes(query) ; 
         res.status(200).send(data) ; 
-
     }
     catch(err){
         res.status(400).send(err.message) ; 
@@ -54,7 +55,7 @@ exports.updateNoteById = async (req,res) =>{
 exports.deleteNote = async(req,res) =>{
     try{
         await this.deleteNote(req.params.id) ; 
-        res.status(200).send(id) ; 
+        res.status(200).send(req.params.id) ; 
     }
     catch(err){
         res.status(400).send(err.message) ; 
