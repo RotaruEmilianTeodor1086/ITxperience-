@@ -4,8 +4,8 @@ import{useRouteMatch, useHistory} from "react-router-dom"
 import { GET_ALL_NOTES,BASE_URL,GET_TRASH_NOTES } from '../../util/apiEndpoints';
 import { getRequest } from '../../util/apiRequests';
 import { NotesContext } from '../../context/context';
-const Notes = (props) =>{
 
+const Notes = (props) =>{
      const[error,setError] = useState(null) ; 
      const notesContext = useContext(NotesContext) ; 
      const {title} = props ; 
@@ -13,6 +13,7 @@ const Notes = (props) =>{
      const match = useRouteMatch() ; 
      useEffect(()=>{
           getNotes() ; 
+
      },[match.url])
 
      const getNotes = async()=>{
