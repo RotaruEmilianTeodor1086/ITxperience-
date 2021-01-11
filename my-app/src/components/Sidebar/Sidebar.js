@@ -1,12 +1,12 @@
 import React from 'react'
 import './Sidebar.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faAngleDown,faSearch,faPlus,faStar, faStickyNote,faTrash} from '@fortawesome/free-solid-svg-icons'
+import {faAngleDown,faSearch,faPlus,faStar, faStickyNote,faTrash, faThumbsUp} from '@fortawesome/free-solid-svg-icons'
 
 function Sidebar() {
   return (
     <div className="sidebar">
-    <div className="sidebar_top">
+        <div className="sidebar_top">
             <div className="sidebar_profile">
                 <div className="profile_icon">
                     A
@@ -50,10 +50,12 @@ function Sidebar() {
                      </li>
                  </ul>
             </div>
-            <div className= "idk">
-
-            </div>
+            <hr id="horizontalLine"></hr>
         </div>
+        <footer className= "teamName">
+            <FontAwesomeIcon className="ItxperienceIcon" icon={faThumbsUp}></FontAwesomeIcon>
+                Itxperience
+        </footer>
     </div>
   );
 }

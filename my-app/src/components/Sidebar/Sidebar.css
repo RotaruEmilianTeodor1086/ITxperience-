@@ -1,10 +1,11 @@
 .sidebar{
-    width: 25%;
-    background:#0f036b;
+    width: 23%;
+    background:#210663;
     display: flex;
     flex-direction: column;
     color: white;
     height: 100vh;
+    float:left;
 }
 .sidebar_top{
     flex:1 ; 
@@ -64,11 +65,17 @@
     padding: 0 10px;
     color: rgb(31, 29, 29);
 }
+
+.create_note_button:hover{
+    background: linear-gradient(90deg,#CE5E00,#F0974C,#FFC878,#CE5E00);
+}
+
 .create_note_button{
     align-content: center;
     width: 90%;
+    font-family: 'Times New Roman', Times, serif;
     display: flex;
-    background: linear-gradient(90deg,#CE5E00,#F0974C,#FFC878,#CE5E00);
+    background:#FFAD51;
     border-radius: 50px;
     justify-content: left;
     font-size: 85%;
@@ -100,14 +107,22 @@ ul
     flex-direction: column;
     justify-content: left;
     list-style-type: none;
-
+    margin-bottom:40px;
 }
 
 li
 {
     font-family:'Lato', sans-serif ; 
     margin-top:20px;
+    width:96%
 }
+
+li:hover
+{
+    text-shadow: 2px 2px 4px #000000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
 
 .iconDummy
 {
@@ -122,4 +137,15 @@ li
 .iconAllNotes
 {
   margin-right:7px;
+}
+
+.teamName
+{
+    margin-bottom: 7px;
+    color:#F5F1FF;
+    opacity: 0.7;
+    display:flex;
+    justify-content: center;
+    font-family:'Lato', sans-serif ; 
+    font-size:11pt;
 }
