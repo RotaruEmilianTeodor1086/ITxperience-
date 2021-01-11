@@ -6,6 +6,7 @@
   display:flex;
   flex-direction: column;
   border-right: 1px solid #E6E6E6;
+  float:left;
 }
 
 .TopNotesList
@@ -16,13 +17,12 @@
     padding:6px 20px;
     height:80px;
     box-sizing: border-box;
-    border-bottom: 1px solid #E6E6E6;
 }
 
 .TopNotesListTitle
 {
     font-family:'Lato', sans-serif ; 
-    font-size:15pt;
+    font-size:18pt;
     color: #210663;
 }
 
@@ -43,11 +43,17 @@
     height:110px;
     padding: 18px 24px;
     box-sizing: border-box;
-    border: 1px solid #E6E6E6;
+    border-top: 3px solid #EAF5FA;
+    border-bottom: 3px solid #EAF5FA;
     display: flex;
     flex-direction: column;
     background-color: #C4DBE9;
 
+}
+
+.MiddleNotesListPreview:hover
+{
+    background: #E0EFF7;
 }
 
 .MiddleNotesListPreviewHead
@@ -59,6 +65,8 @@
     align-items: center;
 
 }
+
+
 
 .MiddleNotesListPreviewHead_NoteTitle
 {
@@ -74,5 +82,23 @@
 
 .MiddleNotesListPreviewHead_NoteDescription
 {
-    
+    width:100%;
+    font-family:'Lato', sans-serif ; 
+    font-size: 13px;
+    font-weight: lighter;
+    opacity:0.65;
+    margin-top:6px;
+    text-overflow: ellipsis;
+}
+.MiddleNotesListPreviewBottom_Date
+{
+    font-size:13px;
+    color:black;
+    opacity:0.85;
+    font-family:'Lato', sans-serif ; 
+}
+
+.MiddleNotesListPreviewBottom_Date:hover
+{
+    cursor:pointer;
 }
