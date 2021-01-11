@@ -1,6 +1,7 @@
 let MONGO_DB= require('mongodb') ; 
 const MongoClient = MONGO_DB.MongoClient ; 
-const url = process.env.MONGO_URL ; 
+MONGO_URL= "mongodb://localhost:27017/Notes4You"
+const url = MONGO_URL ; 
 try{
     let M_CONNECT= MongoClient.connect(url,{
         useUnifiedTopology:true
