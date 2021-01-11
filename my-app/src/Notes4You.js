@@ -1,3 +1,4 @@
+import React, {useReducer} from 'react'
 import './Notes4You.css';
 import './components/Sidebar/Sidebar'
 import Sidebar from './components/Sidebar/Sidebar';
@@ -8,9 +9,16 @@ import{
   Switch,
   Route
 } from "react-router-dom"
-function Notes4You() {
+import{NotesContext} from './context/context'
+import NoteReducer from './reducer/NoteReducer'
+const initialState= [] ; 
+
+const Notes4You = ()=> {
+
+  const[notes,notesDispatch] = useReducer(NoteReducer,initialState) ; 
   return (
     <Router>
+      <NotesContext.Provider value = {{notesState:notes,notesDispatch}}>
     <div className="Notes4You">
       <Sidebar/>
       <Switch>
@@ -30,6 +38,7 @@ function Notes4You() {
       </Switch>
       
     </div>
+    </NotesContext.Provider>
     </Router>
   );
 }

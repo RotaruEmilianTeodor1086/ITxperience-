@@ -1,17 +1,33 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import './Sidebar.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faAngleDown,faSearch,faPlus,faStar, faStickyNote,faTrash, faThumbsUp} from '@fortawesome/free-solid-svg-icons'
-import {NavLink} from 'react-router-dom'
+import {NavLink, useHistory} from 'react-router-dom'
 import { postRequest } from '../../util/apiRequests';
 import { BASE_URL,CREATE_NOTE} from '../../util/apiEndpoints';
+import {NotesContext} from './../../context/context'
+
+
+const Sidebar= ()=>{
+const notesContext= useContext(NotesContext) ; 
+const history = useHistory() ; 
+const [error,setError] = useState(null) ; 
 
 const handleButtonCreate = async()=>{
     const response = await postRequest(`${BASE_URL}${CREATE_NOTE}`);
-    console.log(response) ; 
+    console.log(response) ;
+    if(response.error){
+        setError(response.error) ; 
+        return false ; 
+    } 
+    if(response._id){
+        notesContext.notesDispatch({type:'createNoteSuccess',paylod: response}) ; 
+        history.push({
+            pathname:`/all-notes/${response._id}`,
+            note:response
+        })
+    }
 }
-function Sidebar() {
-
   return (
     <div className="sidebar">
         <div className="sidebar_top">
