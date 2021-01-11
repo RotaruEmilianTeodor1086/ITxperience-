@@ -22,8 +22,8 @@ const Note=()=> {
       const[selectednote]= notesContext.notesState.filter((e)=>e.id===params.id) ; 
       if(location.note){
         setTitle(location.note.title)
-        setDescription(location.note.description); 
-        setupdatedDate(location.note.updatedDate) ; 
+        setDescription(location.note.desc); 
+        setupdatedDate(location.note.updatedAt) ; 
         setIsArchive(location.note.archive) ; 
   
       }}},[location.note])
@@ -39,8 +39,8 @@ const Note=()=> {
       if(key == 'title'){
         query['title'] = title ; 
 
-      } else if(key=='description'){
-        query['description'] = description ;        
+      } else if(key=='des'){
+        query['des'] = description ;        
       }
       const response = await putRequest(`${BASE_URL}${UPDATE_NOTE}${params.id}`,query) ; 
       if(response.error){
