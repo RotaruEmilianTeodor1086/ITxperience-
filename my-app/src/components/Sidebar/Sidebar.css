@@ -109,17 +109,34 @@ ul
     list-style-type: none;
     margin-bottom:40px;
 }
+li{
+    font-family:'Lato', sans-serif ; 
+    margin-top:20px;
+    cursor:pointer;
+    width:96%;
+}
+li:hover
+{
+    text-shadow: 2px 2px 4px #000000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
 
-li
+li a
 {
     font-family:'Lato', sans-serif ; 
     margin-top:20px;
     width:96%;
     cursor:pointer;
+    color:white;
+    text-decoration: none;
 
 }
 
-li:hover
+li a:active{
+    color:lightblue;
+}
+
+li a:hover
 {
     text-shadow: 2px 2px 4px #000000;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);

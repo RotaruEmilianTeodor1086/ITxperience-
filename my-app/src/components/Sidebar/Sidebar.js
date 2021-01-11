@@ -2,8 +2,15 @@ import React from 'react'
 import './Sidebar.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faAngleDown,faSearch,faPlus,faStar, faStickyNote,faTrash, faThumbsUp} from '@fortawesome/free-solid-svg-icons'
+import {NavLink} from 'react-router-dom'
+import { postRequest } from '../../util/apiRequests';
+import { BASE_URL,CREATE_NOTE} from '../../util/apiEndpoints';
 
 function Sidebar() {
+    const handleButtonCreate = async()=>{
+        const response = await postRequest(`${BASE_URL}${CREATE_NOTE}`);
+        console.log(response) ; 
+    }
   return (
     <div className="sidebar">
         <div className="sidebar_top">
@@ -23,7 +30,7 @@ function Sidebar() {
                 </div>
             </div>
             <div className= "sidebare_new_note">
-                <div className= "create_note_button">                
+                <div className= "create_note_button" onClick={handleButtonCreate}>                
                 <FontAwesomeIcon id="iconAdd" icon={faPlus}/>
                 <div className="note_title">
                     <strong>Adauga notita</strong>
@@ -34,19 +41,24 @@ function Sidebar() {
             <div className="sidebar_menu">
                  <ul>
                      <li>
-                       <FontAwesomeIcon className="iconDummy" icon={faStar}>
-                       </FontAwesomeIcon>
-                       Exemplu
+                        <NavLink to ="/dummy">
+                            <FontAwesomeIcon className="iconDummy" icon={faStar} />  
+                            Exemplu                    
+                       </NavLink>
+
                      </li>
                      <li>
-                       <FontAwesomeIcon className="iconAllNotes" icon={faStickyNote}>
-                       </FontAwesomeIcon>
-                       Toate notitele
+                        <NavLink to="/all-notes">
+                            <FontAwesomeIcon className="iconAllNotes" icon={faStickyNote}/>
+                            Toate notitele
+                        </NavLink>
+
                      </li>
                      <li>
-                       <FontAwesomeIcon className="iconTrash" icon={faTrash}>
-                       </FontAwesomeIcon>
-                       Cos de gunoi
+                        <NavLink to="/trash">
+                            <FontAwesomeIcon className="iconTrash" icon={faTrash}/>
+                            Cos de gunoi
+                        </NavLink>
                      </li>
                  </ul>
             </div>

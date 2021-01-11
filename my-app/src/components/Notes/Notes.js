@@ -1,12 +1,13 @@
 import React from 'react'
 import './Notes.css';
 
-function Notes() {
+function Notes(props) {
+     const {title} = props ; 
   return (
     <div className="AllTheNotes">
          <div className="TopNotesList">
               <div className="TopNotesListTitle">
-                  Toate notitele
+                  {title}
               </div>
               <div className="TopNotesListTitle2">
                   <div className="TopNotesListNumber">
