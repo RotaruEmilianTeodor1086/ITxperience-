@@ -5,7 +5,8 @@ MONGO_DB_NAME= "Notes4You"
 MONGO_DB_NOTES_COLLECTION= "notes"
 
 exports.createNote = async(payload) =>{
-    constDB= (await M_CONNECT).db.apply(MONGO_DB_NAME) ;
+
+    const db= (await M_CONNECT).db(MONGO_DB_NAME) ;
     let collection = await db.collection(MONGO_DB_NOTES_COLLECTION) ; 
     let res= await collection.insertOne(payload) ; 
     return res.insertedId ;  

@@ -2,17 +2,18 @@ const{createNote,fetchAllNotes,updateNote,deleteNote}= require('./model') ;
 const {getTime}= require('./helper') ;
 exports.createNewNote= async(req,res)=>{
 try{
-    let currentTime = getTime() ; 
+
+    let currentTime = getTime() ;  
     let newNote= {
         title: 'Untitled',
         description:'',
         creationDate: currentTime,
         updatedDate: currentTime,
-
     }
     let id = await createNote(newNote) ;
     newNote['_id'] = id ; 
-    res.status(200).send(newNote) ;  
+    res.status(200).send(newNote) ; 
+
 }
 catch(err){
     res.status(400).send(err.message) ; 
