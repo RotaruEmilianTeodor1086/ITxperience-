@@ -6,11 +6,12 @@ import {NavLink} from 'react-router-dom'
 import { postRequest } from '../../util/apiRequests';
 import { BASE_URL,CREATE_NOTE} from '../../util/apiEndpoints';
 
+const handleButtonCreate = async()=>{
+    const response = await postRequest(`${BASE_URL}${CREATE_NOTE}`);
+    console.log(response) ; 
+}
 function Sidebar() {
-    const handleButtonCreate = async()=>{
-        const response = await postRequest(`${BASE_URL}${CREATE_NOTE}`);
-        console.log(response) ; 
-    }
+
   return (
     <div className="sidebar">
         <div className="sidebar_top">

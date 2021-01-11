@@ -1,4 +1,4 @@
-const{createNode,fetchAllNotes,updateNote,deleteNote}= require('./model') ; 
+const{createNote,fetchAllNotes,updateNote,deleteNote}= require('./model') ; 
 const {getTime}= require('./helper') ;
 exports.createNewNote= async(req,res)=>{
 try{
@@ -7,10 +7,10 @@ try{
         title: 'Untitled',
         description:'',
         creationDate: currentTime,
-        updatedDate: currentTime
+        updatedDate: currentTime,
 
     }
-    let id = await this.createNewNote(new Note) ;
+    let id = await createNote(newNote) ;
     newNote['_id'] = id ; 
     res.status(200).send(newNote) ;  
 }

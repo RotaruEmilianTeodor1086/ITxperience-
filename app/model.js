@@ -1,5 +1,5 @@
 const { response } = require("express");
-const {MONGO_DB,M_CONNECT}= require(`./config/mongoDB`) ; 
+const {MONGO_DB,M_CONNECT}= require('./config/mongoDB') ; 
 exports.createNote = async(payload) =>{
     constDB= (await M_CONNECT).db.apply(process.env.MONGO_DB_NAME) ;
     let collection = await db.collection(process.env.MONGO_DB_NOTES_COLLECTION) ; 
