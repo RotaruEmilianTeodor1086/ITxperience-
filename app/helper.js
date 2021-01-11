@@ -1,3 +1,3 @@
-exports.getTime = () =>{
-    return Date.now() ; 
+exports.getTime = () => {
+    return Date.now();
 }

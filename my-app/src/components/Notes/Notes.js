@@ -40,7 +40,6 @@ const Notes = (props) =>{
                })
           }
      }
-
   return (
     <div className="AllTheNotes">
          <div className="TopNotesList">
@@ -48,14 +47,14 @@ const Notes = (props) =>{
                   {title}
               </div>
               <div className="TopNotesListTitle2">
-                  <div className="TopNotesListNumber">
+                  <div className="TopNotesListNumber">                       
                    {notesContext.notesState.length} notite
                   </div>
               </div>
          </div>
          <div class="MiddleNotesList">
               {
-              notesContext.notesState.length >0? notesContext.notesState.map((note)=>(
+              notesContext.notesState.length >0 && notesContext.notesState.length !== undefined ? notesContext.notesState.map((note)=>(
                <NavLink key = {note._id} class="MiddleNotesListPreview"
                to ={
                      {

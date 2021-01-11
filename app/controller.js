@@ -7,8 +7,8 @@ exports.createNewNote = async (req, res) => {
         let newNote = {
             title: 'Untitled',
             desc: '',
-            creationDate: currentTime,
-            updatedDate: currentTime,
+            createdAt: currentTime,
+            updatedAt: currentTime,
             archive: 0
         }
         let id = await createNote(newNote);
@@ -25,7 +25,7 @@ exports.getAllNotes = async (req, res) => {
         let query = {
             archive: 0
         };
-        if (req.params.type === 'trash') {
+        if (req.params.type == 'trash') {
             query.archive = 1;
         }
         let data = await fetchAllNotes(query);
@@ -41,7 +41,7 @@ exports.updateNoteById = async (req, res) => {
         let currentTime = getTime();
         let query = {
             ...req.body,
-            updatedDate: currentTime
+            updatedAt: currentTime
         }
         await updateNote(req.params.id, query);
         res.status(200).send(query);
