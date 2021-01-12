@@ -7,8 +7,8 @@ exports.createNewNote = async (req, res) => {
         let newNote = {
             title: 'Untitled',
             desc: '',
-            createdAt: currentTime,
-            updatedAt: currentTime,
+            creationDate: currentTime,
+            updatedDate: currentTime,
             archive: 0
         }
         let id = await createNote(newNote);

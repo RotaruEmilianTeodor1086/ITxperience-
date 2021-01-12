@@ -22,8 +22,8 @@ const Note=()=> {
       const[selectednote]= notesContext.notesState.filter((e)=>e.id===params.id) ; 
       if(location.note){
         setTitle(location.note.title)
-        setDescription(location.note.desc); 
-        setupdatedDate(location.note.updatedAt) ; 
+        setDescription(location.note.description); 
+        setupdatedDate(location.note.updatedDate) ; 
         setIsArchive(location.note.archive) ; 
   
       }}},[location.note])
@@ -50,8 +50,6 @@ const Note=()=> {
       notesContext.notesDispatch({type: 'updateNoteSuccess', payload:response, id: params.id}) ; 
       
     }
-
-
   return (
     <div className="EditableNote">
         <div className="EditableNote_Top">
