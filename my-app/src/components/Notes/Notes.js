@@ -11,7 +11,6 @@ const Notes = (props) =>{
      const {title} = props ; 
      const history = useHistory() ; 
      const match = useRouteMatch() ; 
-     console.log(match.url) ; 
      useEffect(()=>{
           getNotes() ; 
      },[match.url])
@@ -26,12 +25,13 @@ const Notes = (props) =>{
                return; 
           }
           const response = await getRequest(`${BASE_URL}${endpoint}`) ;  
+          console.log(response) ; 
+          console.log(response) ; 
           if(response.error){
                setError(response.error) ; 
                return false ; 
           }
-          notesContext.notesDispatch({type:'getAllNotesSuccess',paylod: response}) ; 
-
+          notesContext.notesDispatch({type:'getAllNotesSuccess',payload: response}) ; 
           if(response.length >0){
 
                history.push({
@@ -54,7 +54,7 @@ const Notes = (props) =>{
          </div>
          <div class="MiddleNotesList">
               {
-              notesContext.notesState.length >0 && notesContext.notesState.length !== undefined ? notesContext.notesState.map((note)=>(
+              notesContext.notesState.length >0 ? notesContext.notesState.map((note)=>(
                <NavLink key = {note._id} class="MiddleNotesListPreview"
                to ={
                      {
