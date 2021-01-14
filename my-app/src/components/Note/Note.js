@@ -17,6 +17,8 @@ const Note=()=> {
   const[isArchhive,setIsArchive] = useState(0) ; 
   const[error,setError] = useState(null) ; 
   const notesContext= useContext(NotesContext) ; 
+  const idBun = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) ;
+  console.log(idBun) ;  
 
   useEffect(() => {
     if (location.note) {
@@ -28,7 +30,7 @@ const Note=()=> {
 }, [location.note])
   useEffect(()=>{
     if(notesContext.notesState.length > 0){
-      const [selectednote] = notesContext.notesState.filter((e) => e._id === params.id);
+      const [selectednote] = notesContext.notesState.filter((e) => e._id === idBun);
       if(selectednote){
         setTitle(selectednote.title)
         setDescription(selectednote.description); 
@@ -51,12 +53,12 @@ const Note=()=> {
       } else if(key=='description'){
         query['description'] = description ;        
       }
-      const response = await putRequest(`${BASE_URL}${UPDATE_NOTE}${params.id}`,query) ; 
+      const response = await putRequest(`${BASE_URL}${UPDATE_NOTE}${idBun}`,query) ; 
       if(response.error){
         setError(response.error) ; 
         return false ; 
       }
-      notesContext.notesDispatch({ type: 'updateNoteSuccess', payload: response, id: params.id })
+      notesContext.notesDispatch({ type: 'updateNoteSuccess', payload: response, id:idBun})
       
     }
   return (

@@ -4,6 +4,7 @@ import{useRouteMatch, useHistory, NavLink} from "react-router-dom"
 import { GET_ALL_NOTES,BASE_URL,GET_TRASH_NOTES } from '../../util/apiEndpoints';
 import { getRequest } from '../../util/apiRequests';
 import { NotesContext } from '../../context/context';
+import Note from '../Note/Note';
 
 const Notes = (props) =>{
      const[error,setError] = useState(null) ; 
@@ -54,12 +55,11 @@ const Notes = (props) =>{
               {
               notesContext.notesState.length >0 ? notesContext.notesState.map((note)=>(
                <NavLink key = {note._id} className="MiddleNotesListPreview"
-               to ={
+                to ={
                     {
-                    pathname:`${match.url}/${note._id}`,                  
-                    note
-                    }
-                    
+                    pathname:`${match.url}/${note._id}`,
+                    note                  
+                    }                  
                }>
                <div class="MiddleNotesListPreviewHead">
                     <div class="MiddleNotesListPreviewHead_NoteTitle">{note.title}</div>
