@@ -1,4 +1,4 @@
-import React,{useContext, useEffect, useReducer, useState} from 'react'
+import React,{Component, useContext, useEffect, useReducer, useState} from 'react'
 import './Notes.css';
 import{useRouteMatch, useHistory, NavLink} from "react-router-dom"
 import { GET_ALL_NOTES,BASE_URL,GET_TRASH_NOTES } from '../../util/apiEndpoints';
@@ -15,31 +15,29 @@ const Notes = (props) =>{
           getNotes() ; 
      },[match.url])
 
-     const getNotes = async()=>{
-          let endpoint = '' ; 
-          if(match.url =='/all-notes'){
-               endpoint = GET_ALL_NOTES
-          }else if(match.url =='/trash' ){
-               endpoint= GET_TRASH_NOTES ; 
-          }else{
-               return; 
+     const getNotes = async () => {
+          let endpoint = '';
+          if (match.url == '/all-notes') {
+              endpoint = GET_ALL_NOTES;
+          } else if (match.url == '/trash') {
+              endpoint = GET_TRASH_NOTES;
+          } else {
+              return;
           }
-          const response = await getRequest(`${BASE_URL}${endpoint}`) ;  
-          console.log(response) ; 
-          console.log(response) ; 
-          if(response.error){
-               setError(response.error) ; 
-               return false ; 
+  
+          const response = await getRequest(`${BASE_URL}${endpoint}`)
+          if (response.error) {
+              setError(response.error);
+              return false;
           }
-          notesContext.notesDispatch({type:'getAllNotesSuccess',payload: response}) ; 
-          if(response.length >0){
-
-               history.push({
-                   pathname:`${match.url}/${response._id}`,
-                   note:response
-               })
+          notesContext.notesDispatch({ type: 'getAllNotesSuccess', payload: response });
+          if (response.length > 0) {
+              history.push({
+                  pathname: `${match.url}/${response[0]._id}`,
+                  note: response[0]
+              })
           }
-     }
+      }
   return (
     <div className="AllTheNotes">
          <div className="TopNotesList">
@@ -55,13 +53,14 @@ const Notes = (props) =>{
          <div class="MiddleNotesList">
               {
               notesContext.notesState.length >0 ? notesContext.notesState.map((note)=>(
-               <NavLink key = {note._id} class="MiddleNotesListPreview"
+               <NavLink key = {note._id} className="MiddleNotesListPreview"
                to ={
-                     {
-                    pathname:`${match.url}/${note._id}`,
+                    {
+                    pathname:`${match.url}/${note._id}`,                  
                     note
-               }
-          }>
+                    }
+                    
+               }>
                <div class="MiddleNotesListPreviewHead">
                     <div class="MiddleNotesListPreviewHead_NoteTitle">{note.title}</div>
                     <div class="MiddleNotesListPreviewHead_NoteDescription">{note.description}</div>

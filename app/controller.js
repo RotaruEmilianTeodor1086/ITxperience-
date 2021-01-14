@@ -6,7 +6,7 @@ exports.createNewNote = async (req, res) => {
         let currentTime = getTime();
         let newNote = {
             title: 'Untitled',
-            desc: '',
+            description: '',
             creationDate: currentTime,
             updatedDate: currentTime,
             archive: 0

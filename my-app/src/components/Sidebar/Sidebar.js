@@ -21,7 +21,7 @@ const handleButtonCreate = async()=>{
         return false ; 
     } 
     if(response._id){
-        notesContext.notesDispatch({type:'createNoteSuccess',paylod: response}) ; 
+        notesContext.notesDispatch({type:'createNoteSuccess',payload: response}) ; 
         history.push({
             pathname:`/all-notes/${response._id}`,
             note:response
