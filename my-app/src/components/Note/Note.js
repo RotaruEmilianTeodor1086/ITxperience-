@@ -18,8 +18,6 @@ const Note=()=> {
   const[error,setError] = useState(null) ; 
   const notesContext= useContext(NotesContext) ; 
   const idBun = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) ;
-  console.log(idBun) ;  
-
   useEffect(() => {
     if (location.note) {
         setTitle(location.note.title)
