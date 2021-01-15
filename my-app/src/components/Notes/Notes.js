@@ -5,6 +5,7 @@ import { GET_ALL_NOTES,BASE_URL,GET_TRASH_NOTES } from '../../util/apiEndpoints'
 import { getRequest } from '../../util/apiRequests';
 import { NotesContext } from '../../context/context';
 import Note from '../Note/Note';
+import { listFormatDate } from './../../util/helpers';
 
 const Notes = (props) =>{
      const[error,setError] = useState(null) ; 
@@ -65,7 +66,8 @@ const Notes = (props) =>{
                     <div class="MiddleNotesListPreviewHead_NoteTitle">{note.title}</div>
                     <div class="MiddleNotesListPreviewHead_NoteDescription">{note.description}</div>
                </div>
-               <div class="MiddleNotesListPreviewBottom_Date">{note.updatedDate}</div>
+               <div class="MiddleNotesListPreviewBottom_Date">
+                   {listFormatDate(note.updatedDate)}</div>
                </NavLink>
               )
                     

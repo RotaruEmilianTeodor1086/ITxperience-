@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './Note.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faArchive} from '@fortawesome/free-solid-svg-icons';
+import {faArchive, faBackward, faTrash} from '@fortawesome/free-solid-svg-icons';
 import{useLocation , useParams,useHistory}from "react-router-dom" ; 
-import { postRequest, putRequest } from '../../util/apiRequests';
-import { BASE_URL,CREATE_NOTE, UPDATE_NOTE} from '../../util/apiEndpoints';
+import { deleteRequest, postRequest, putRequest } from '../../util/apiRequests';
+import { BASE_URL,CREATE_NOTE, UPDATE_NOTE, DELETE_NOTE} from '../../util/apiEndpoints';
 import { NotesContext } from '../../context/context';
+import { noteFormatDate } from './../../util/helpers';
 
 const Note=()=> {
   const history = useHistory();
@@ -59,14 +60,92 @@ const Note=()=> {
       notesContext.notesDispatch({ type: 'updateNoteSuccess', payload: response, id:idBun})
       
     }
+
+
+    const handleArchiveNote = async () => {
+      let query = {
+          archive: 1
+      };
+      const response = await putRequest(`${BASE_URL}${UPDATE_NOTE}${idBun}`, query);
+      if (response.error) {
+          setError(response.error);
+          return false;
+      }
+      notesContext.notesDispatch({ type: 'archiveNoteSuccess', id: idBun });
+      resetState();
+      history.push(`/all-notes`)
+  }
+
+  const handleUnArchiveNote = async () => {
+    let query = {
+        archive: 0
+    }
+
+    const response = await putRequest(`${BASE_URL}${UPDATE_NOTE}${idBun}`, query);
+    if (response.error) {
+        setError(response.error);
+        return false;
+    }
+    notesContext.notesDispatch({ type: 'archiveNoteSuccess', id: idBun })
+    resetState();
+    history.push(`/trash`)
+}
+
+const handleDeleteNote = async () => {
+  const response = await deleteRequest(`${BASE_URL}${DELETE_NOTE}${idBun}`);
+  if (response.error) {
+      setError(response.error);
+      return false;
+  }
+  notesContext.notesDispatch({ type: 'deleteNoteSuccess', id: response })
+  resetState();
+  history.push('/trash');
+}
+
+  const resetState = () => {
+    setTitle('');
+    setDescription('');
+    setupdatedDate('');
+    setIsArchive(0);
+    setError(null);
+}
+
   return (
     <div className="EditableNote">
         <div className="EditableNote_Top">
-            <div className="EditableNote_Top_Date">Ultima editare la {updatedDate}</div>
+            <div className="EditableNote_Top_Date">
+              Ultima editare la {noteFormatDate(updatedDate)}
+              </div>
             <div className="EditableNote_Top_Buttons">
-                 <div className="action_buttons">
-                     <FontAwesomeIcon id="idArchive" icon={faArchive}></FontAwesomeIcon>
-                 </div>
+
+            {!isArchhive ? 
+                  (
+                    <div className="action_buttons" onClick={handleArchiveNote}>
+                    <FontAwesomeIcon id="idArchive" icon={faArchive} />
+                    </div>
+                  ) : 
+                  (
+                      <>
+                          <div className="action-btn">
+                          <FontAwesomeIcon icon={faBackward} onClick={handleUnArchiveNote} />
+                          </div>
+              
+                          <div className="action-btn" onClick={handleDeleteNote}>
+                          <FontAwesomeIcon icon={faTrash} />
+                        </div>
+                      </>
+                    )}
+
+
+
+
+                 
+
+
+
+
+
+
             </div>
         </div>
         <div className="EditableNote_Middle">
