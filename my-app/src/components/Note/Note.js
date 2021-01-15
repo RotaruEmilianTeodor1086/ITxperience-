@@ -135,17 +135,6 @@ const handleDeleteNote = async () => {
                         </div>
                       </>
                     )}
-
-
-
-
-                 
-
-
-
-
-
-
             </div>
         </div>
         <div className="EditableNote_Middle">
