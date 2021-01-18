@@ -14,14 +14,14 @@ import NoteReducer from './reducer/NoteReducer'
 import Login from'./Login'
 const initialState= [] ; 
 
-const Notes4You = ()=> {
+const Notes4You = (props)=> {
 
   const[notes,notesDispatch] = useReducer(NoteReducer,initialState) ; 
   return (
     <Router>
       <NotesContext.Provider value = {{notesState:notes,notesDispatch}}>
     <div className="Notes4You">
-      <Sidebar/>
+      <Sidebar username={props.username}/>
       <Switch>
         <Route path = "/all-notes">
           <Notes title="Toate notitele"/>

@@ -8,7 +8,7 @@ import { BASE_URL,CREATE_NOTE} from '../../util/apiEndpoints';
 import {NotesContext} from './../../context/context'
 
 
-const Sidebar= ()=>{
+const Sidebar= (props)=>{
 const notesContext= useContext(NotesContext) ; 
 const history = useHistory() ; 
 const [error,setError] = useState(null) ; 
@@ -33,10 +33,10 @@ const handleButtonCreate = async()=>{
         <div className="sidebar_top">
             <div className="sidebar_profile">
                 <div className="profile_icon">
-                    A
+                    {props.username.charAt(0)}
                 </div>
                 <div className="profile_title">
-                    Claudiu Soare
+                    {props.username}
                     <FontAwesomeIcon className="icon" icon = {faAngleDown} />
                 </div>
             </div>
