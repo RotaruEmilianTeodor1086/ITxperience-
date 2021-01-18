@@ -52,10 +52,12 @@
     border-radius: 50px;
 }
 #input{
-    border-color: transparent;
+    border: none;
+    fill: none;
     margin-left: 5px;
+    background: none;
     width: 70%;
-    background-color: transparent;
+    color: black; 
 }
 #iconSearch{
     color:#0f036b ;

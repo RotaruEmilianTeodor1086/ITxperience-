@@ -33,7 +33,7 @@ const handleButtonCreate = async()=>{
         <div className="sidebar_top">
             <div className="sidebar_profile">
                 <div className="profile_icon">
-                    {props.username.charAt(0)}
+                    {props.username.charAt(0).toUpperCase()}
                 </div>
                 <div className="profile_title">
                     {props.username}

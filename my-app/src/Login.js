@@ -8,8 +8,19 @@ const [isActive,setIsActine]= useState(true) ;
 const [username,setUsername] = useState('') ; 
 const [password,setPassword] = useState('') ; 
 const handleButtonLogin = ()=>{
+  let ok =false ; 
+  console.log(username) ; 
+  let value= username.substring(username.lastIndexOf("@")+1) ; 
+  if(value === "stud.ase.ro" && password ==="nota10"){
+    ok= true ; 
+  }
+  if(ok){
+    setIsActine(false) ; 
+  }
+  else{
+    alert('Acest cont nu exista!') ; 
+  }
 
-  setIsActine(false) ; 
 }
 
 const hanlerUsernameChange= (e)=>{
@@ -27,7 +38,7 @@ if(isActive){
       <h1>Login</h1>           
           <input type="text"  placeholder="Username" required="required" onChange={hanlerUsernameChange} />
             <input type="password"  placeholder="Password" required="required" onChange={hanlerPasswordChange} />
-            <button type="submit" class="btn btn-primary btn-block btn-large"  onClick={handleButtonLogin} >Let me in.</button>
+            <button  class="btn btn-primary btn-block btn-large"  onClick={handleButtonLogin} >Log in</button>
       </div>
       </form>
     
